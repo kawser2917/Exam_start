@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home'),
     path('crud/',views.crud,name='crud'),
+    path('edit/',views.update_data,name="edit")
 ]

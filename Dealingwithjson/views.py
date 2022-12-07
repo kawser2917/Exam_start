@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponseRedirect
 from .models import jsonToSql
 import json
+from .forms import Updatedata
 
 
 def home(request):
@@ -17,3 +18,15 @@ def crud(request):
     #     jsonToSql.objects.create(date=i['date'],trade_code=i['trade_code'],high=i['high'],low=i['low'],open=i['open'],close=i['close'],volume=i['volume'])
     data = jsonToSql.objects.all().order_by("id")
     return render(request,'Dealingwithjson/crud.html',{'data':data})
+
+def update_data(request,id):
+    if request.method == "POST":
+        pi = jsonToSql.objects.get(pk=id)
+        fm =  Updatedata(request.POST,instance=pi)
+        if fm.is_valid():
+            fm.save()
+            return HttpResponseRedirect('/')
+    else:
+        pi = jsonToSql.objects.get(pk=id)
+        fm = jsonToSql(instance=pi)
+    return render(request,"Dealingwithjson/updatedata.html",{"form":fm})
