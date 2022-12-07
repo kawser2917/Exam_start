@@ -14,6 +14,7 @@ def crud(request):
     json_data = json.load(f)
     # print(json_data)
     # jsonToSql.objects.all().delete()
+    # ---------------------------------    This is taking lot of time needs to improve ------------------->
     # for i in json_data:
     #     jsonToSql.objects.create(date=i['date'],trade_code=i['trade_code'],high=i['high'],low=i['low'],open=i['open'],close=i['close'],volume=i['volume'])
     data = jsonToSql.objects.all().order_by("trade_code")
@@ -25,7 +26,7 @@ def update_data(request,id):
         fm =  Updatedata(request.POST,instance=pi)
         if fm.is_valid():
             fm.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/updatedata/')
     else:
         pi = jsonToSql.objects.get(pk=id)
         fm = Updatedata(instance=pi)
@@ -35,4 +36,4 @@ def delete_data(request,id):
     if request.method == "POST":
         pi = jsonToSql.objects.get(pk=id)
         pi.delete()
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/updatedata/')
