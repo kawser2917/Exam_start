@@ -1,0 +1,32 @@
+{% extends 'Dealingwithjson/base1.html' %}
+
+{% block table %}
+<table class="table mt-5 container">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Trade code</th>
+        <th scope="col">High</th>
+        <th scope="col">Low</th>
+        <th scope="col">Open</th>
+        <th scope="col">Close</th>
+        <th scope="col">Volume</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in data %}
+      <tr>
+        <th>{{i.date}}</th>
+        <td>{{i.trade_code}}</td>
+        <td>{{i.high}}</td>
+        <td>{{i.low}}</td>
+        <td>{{i.open}}</td>
+        <td>{{i.close}}</td>
+        <td>{{i.volume}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock table%}
+ 
