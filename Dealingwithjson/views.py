@@ -26,7 +26,7 @@ def update_data(request,id):
         fm =  Updatedata(request.POST,instance=pi)
         if fm.is_valid():
             fm.save()
-            return HttpResponseRedirect('/updatedata/')
+            return HttpResponseRedirect('/')
     else:
         pi = jsonToSql.objects.get(pk=id)
         fm = Updatedata(instance=pi)
@@ -36,4 +36,4 @@ def delete_data(request,id):
     if request.method == "POST":
         pi = jsonToSql.objects.get(pk=id)
         pi.delete()
-        return HttpResponseRedirect('/updatedata/')
+        return HttpResponseRedirect('/')
